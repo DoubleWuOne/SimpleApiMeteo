@@ -5,33 +5,33 @@ namespace API.Responses
     public class SynopResponse
     {
         [JsonPropertyName("id_stacji")]
-        public string IdStacji { get; set; }
+        public required string IdStacji { get; set; }
 
         [JsonPropertyName("stacja")]
-        public string Stacja { get; set; }
+        public required string Stacja { get; set; }
 
         [JsonPropertyName("data_pomiaru")]
-        public DateTimeOffset DataPomiaru { get; set; }
+        public required DateTimeOffset DataPomiaru { get; set; }
 
         [JsonPropertyName("godzina_pomiaru")]
-        public string GodzinaPomiaru { get; set; }
+        public required string GodzinaPomiaru { get; set; }
 
         [JsonPropertyName("temperatura")]
-        public string Temperatura { get; set; }
+        public required string Temperatura { get; set; }
 
         [JsonPropertyName("predkosc_wiatru")]
-        public string PredkoscWiatru { get; set; }
+        public required string PredkoscWiatru { get; set; }
 
         [JsonPropertyName("kierunek_wiatru")]
-        public string KierunekWiatru { get; set; }
+        public required string KierunekWiatru { get; set; }
 
         [JsonPropertyName("wilgotnosc_wzgledna")]
-        public string WilgotnoscWzgledna { get; set; }
+        public required string WilgotnoscWzgledna { get; set; }
 
         [JsonPropertyName("suma_opadu")]
-        public string SumaOpadu { get; set; }
+        public required string SumaOpadu { get; set; }
 
         [JsonPropertyName("cisnienie")]
-        public string Cisnienie { get; set; }
+        public required string Cisnienie { get; set; }
     }
 }

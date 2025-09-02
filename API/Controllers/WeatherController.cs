@@ -1,4 +1,5 @@
-﻿using API.Interfaces.Services;
+﻿using API.Exceptions;
+using API.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -20,9 +21,7 @@ namespace API.Controllers
         {
             var report = await _synopService.GetSynopReportFullAsync();
             if (report == null || report.Count == 0)
-            {
-                return NotFound($"No data found");
-            }
+                throw new NotFoundException($"No data found");
             return Ok(report);
         }
 
@@ -31,9 +30,8 @@ namespace API.Controllers
         {
             var report = await _synopService.GetSynopReportByIdAsync(id);
             if (report == null)
-            {
-                return NotFound($"There is no station with this id: {id}");
-            }
+                throw new NotFoundException($"There is no station with this id: {id}");
+
             return Ok(report);
         }
 
@@ -42,9 +40,8 @@ namespace API.Controllers
         {
             var report = await _synopService.GetSynopReportByNameAsync(name);
             if (report == null)
-            {
-                return NotFound($"There is no station with this name:{name}");
-            }
+                throw new NotFoundException($"There is no station with this name:{name}");
+
             return Ok(report); //Controller not ControllerBase
         }
     }

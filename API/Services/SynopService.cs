@@ -8,11 +8,13 @@ namespace API.Services
     public class SynopService : ISynopService
     {
         private readonly IHttpClientFactory _httpClient;
+        private readonly ILogger<SynopService> _logger;
         private readonly JsonSerializerOptions _jsonOptions = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
 
-        public SynopService(IHttpClientFactory httpClient)
+        public SynopService(IHttpClientFactory httpClient, ILogger<SynopService> logger)
         {
             _httpClient = httpClient;
+            _logger = logger;
         }
 
         public async Task<SynopResponse?> GetSynopReportByIdAsync(int id)
