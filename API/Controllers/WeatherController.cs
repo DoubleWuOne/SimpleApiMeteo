@@ -17,12 +17,20 @@ namespace API.Controllers
         }
 
         [HttpGet("synop")]
-        public async Task<IActionResult> GetSynopData()
+        public async Task<IActionResult> GetSynopData([FromQuery] string? name)// Add query endpoint like: synop?name=Chojnice 
         {
-            var report = await _synopService.GetSynopReportFullAsync();
-            if (report == null || report.Count == 0)
+            if (!string.IsNullOrWhiteSpace(name))
+            {
+                var report = await _synopService.GetSynopReportByNameAsync(name);
+                if (report == null)
+                    throw new NotFoundException($"There is no station with this name:{name}");
+
+                return Ok(report);
+            }
+            var allReports = await _synopService.GetSynopReportFullAsync();
+            if (allReports == null || allReports.Count == 0)
                 throw new NotFoundException($"No data found");
-            return Ok(report);
+            return Ok(allReports);
         }
 
         [HttpGet("synop/{id}")]
@@ -35,14 +43,14 @@ namespace API.Controllers
             return Ok(report);
         }
 
-        [HttpGet("synop/station/{name}")]
+        [HttpGet("synop/station/{name}")] //stare, nie jest zgodne z REST, pozostawione celowo
         public async Task<IActionResult> GetSynopDataByName(string name)
         {
             var report = await _synopService.GetSynopReportByNameAsync(name);
             if (report == null)
                 throw new NotFoundException($"There is no station with this name:{name}");
 
-            return Ok(report); //Controller not ControllerBase
+            return Ok(report);
         }
     }
 }
