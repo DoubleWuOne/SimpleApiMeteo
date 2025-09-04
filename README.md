@@ -34,5 +34,7 @@ By default, the API is available at http://localhost:5124
 
 Sample queries
 All stations: GET /api/weather/synop
+
 Station by name: GET /api/weather/synop?name=Chojnice
+
 Station by ID: GET /api/weather/synop/{id}
